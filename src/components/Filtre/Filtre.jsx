@@ -19,6 +19,7 @@ export default function Filtre() {
         name="filtre"
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+        placeholder="Start writing a name..."
         required
       />
     </label>

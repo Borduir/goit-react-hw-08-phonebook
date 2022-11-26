@@ -1,9 +1,12 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 
+import { addContact } from '../../redux/operations';
 import css from './Form.module.css';
 
-export default function Form({ checkIfContactExist }) {
+export default function Form() {
+  const contacts = useSelector(state => state.contacts.contacts);
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -17,13 +20,21 @@ export default function Form({ checkIfContactExist }) {
 
   const handleSubmit = event => {
     event.preventDefault();
-    checkIfContactExist(name, number);
+    if (
+      !contacts.find(
+        contact => contact.name.toLowerCase() === name.toLowerCase()
+      )
+    ) {
+      dispatch(addContact({ name: name, number: number }));
+    } else {
+      alert(`${name} is already in contacts.`);
+    }
   };
 
-  const { form, button, input } = css;
+  const { form, button, input, label } = css;
   return (
     <form className={form} onSubmit={handleSubmit}>
-      <label>
+      <label className={label}>
         {' '}
         Name
         <input
@@ -34,10 +45,11 @@ export default function Form({ checkIfContactExist }) {
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          placeholder="Kanye West"
           required
         />
       </label>
-      <label>
+      <label className={label}>
         {' '}
         Number
         <input
@@ -48,6 +60,7 @@ export default function Form({ checkIfContactExist }) {
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          placeholder="+3(012) 345 67 89"
           required
         />
       </label>
@@ -57,6 +70,3 @@ export default function Form({ checkIfContactExist }) {
     </form>
   );
 }
-Form.propTypes = {
-  checkIfContactExist: PropTypes.func.isRequired,
-};

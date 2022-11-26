@@ -1,0 +1,27 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+  margin-right: auto;
+  margin-left: auto;
+  color: orangered;
+  border: 1px solid orangered;
+  padding: 10px;
+}
+
+.label {
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input {
+  width: 175px;
+}
+
+.button {
+  width: 100px;
+  margin-right: auto;
+  margin-left: auto;
+}

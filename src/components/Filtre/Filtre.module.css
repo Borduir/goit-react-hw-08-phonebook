@@ -1,11 +1,19 @@
 .input {
-  margin-top: 10px;
-  margin-left: 10px;
+  border: 1px solid rgba(255, 68, 0, 0.8);
+  border-radius: 4px;
+}
+.input:focus::placeholder {
+  opacity: 0;
 }
 
 .label {
   color: orangered;
+  border: 1px solid;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
 }

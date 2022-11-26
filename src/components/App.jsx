@@ -1,49 +1,30 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { nanoid } from 'nanoid';
 import { useEffect } from 'react';
+import { Routes, Route, Navigate } from 'react-router';
+import { useSelector, useDispatch } from 'react-redux';
+import SharedLayout from './SharedLayout/SharedLayout';
+import RegiserPage from '../pages/RegisterPage/RegisterPage';
+import ContactsPage from '../pages/ContactsPage/ContactsPage';
+import LogInPage from '../pages/loginPage/loginPage';
 
-import Form from './Form/Form';
-import Filtre from './Filtre/Filtre';
-import ContactList from './ContactList/ContactList';
-import { fetchContacts } from '../redux/operations';
-import { addContact } from '../redux/operations';
+import { fetchCurrentUser } from '../redux/auth/authOperations';
 
 export function App() {
-  const contacts = useSelector(state => state.contacts.contacts);
-  const filtre = useSelector(state => state.filtre);
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(fetchCurrentUser());
   }, [dispatch]);
-
-  const checkIfContactExist = (name, phone) => {
-    if (
-      !contacts.find(
-        contact => contact.name.toLowerCase() === name.toLowerCase()
-      )
-    ) {
-      dispatch(addContact({ id: nanoid(), name: name, phone: phone }));
-    } else {
-      alert(`${name} is already in contacts.`);
-    }
-  };
-
-  const createFilteredList = () => {
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(`${filtre.toLowerCase()}`)
-    );
-  };
-
   return (
     <>
-      <div>
-        <h2>Phonebook</h2>
-        <Form checkIfContactExist={checkIfContactExist} />
-        <h2>Contacts</h2>
-        <Filtre />
-        {contacts && <ContactList createFilteredList={createFilteredList()} />}
-      </div>
+      <SharedLayout />
+      <Routes>
+        <Route path="/" element={<h1>Home Page</h1>} />
+        <Route path="/logIn" element={!isLoggedIn && <LogInPage />} />
+        <Route path="/register" element={!isLoggedIn && <RegiserPage />} />
+        <Route path="*" element={<Navigate to={'/'} />} />
+      </Routes>
+      {isLoggedIn && <ContactsPage />}
     </>
   );
 }
