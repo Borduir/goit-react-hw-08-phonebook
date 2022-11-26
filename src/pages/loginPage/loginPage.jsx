@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../../redux/auth/authOperations';
-import css from '../RegisterPage/RegisterPage.module.css';
+import css from '../RegisterPage/RegisterAndLogInPage.module.css';
 
 export default function LogInPage() {
   const [email, setEmail] = useState('');

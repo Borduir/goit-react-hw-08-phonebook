@@ -1,6 +1,12 @@
+.header {
+  border-bottom: 1px solid orangered;
+  padding: 10px;
+}
+
 .nav {
   width: 200px;
-  margin-top: 10px;
   display: flex;
   justify-content: space-around;
+  margin-right: auto;
+  margin-left: auto;
 }

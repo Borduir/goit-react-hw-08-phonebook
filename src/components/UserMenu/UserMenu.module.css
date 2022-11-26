@@ -1,0 +1,22 @@
+.div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  border: 1px solid;
+  border-radius: 4px;
+  color: white;
+  background-color: orangered;
+}
+
+.button:hover,
+.button:focus {
+  cursor: pointer;
+  border: 2px solid orangered;
+}
+
+.p {
+  color: orangered;
+}

@@ -4,16 +4,16 @@ import { NavItem } from './SharedLayout.styled';
 import { useSelector } from 'react-redux';
 
 export default function SharedLayout() {
-  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const token = useSelector(state => state.auth.token);
   return (
-    <header>
-      {!isLoggedIn && (
+    <header className={css.header}>
+      {!token && (
         <nav className={css.nav}>
           <NavItem to="/logIn">Login</NavItem>
           <NavItem to="/register">Register</NavItem>
         </nav>
       )}
-      {isLoggedIn && <UserMenu />}
+      {token && <UserMenu />}
     </header>
   );
 }

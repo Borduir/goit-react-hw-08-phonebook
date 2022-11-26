@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { register } from '../../redux/auth/authOperations';
-import css from './RegisterPage.module.css';
+import css from './RegisterAndLogInPage.module.css';
 
 export default function RegiserPage() {
   const [name, setName] = useState('');
